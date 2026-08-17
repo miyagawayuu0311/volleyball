@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>氷菓 古民家</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        "Hiragino Mincho ProN",
+        "Yu Mincho",
+        "YuMincho",
+        serif;
+      color: #3e3932;
+      background-color: #f3eee4;
+      line-height: 1.8;
+    }
+
+    /* ヘッダー */
+    header {
+      position: relative;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+
+      background:
+        linear-gradient(
+          rgba(45, 39, 31, 0.48),
+          rgba(45, 39, 31, 0.58)
+        ),
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80");
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border: 1px solid rgba(255,255,255,0.55);
+      pointer-events: none;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+      padding: 30px;
+    }
+
+    .shop-subtitle {
+      font-size: 14px;
+      letter-spacing: 5px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 58px;
+      letter-spacing: 12px;
+      margin: 0;
+      font-weight: normal;
+    }
+
+    header p {
+      margin-top: 20px;
+      font-size: 17px;
+      letter-spacing: 3px;
+    }
+
+    /* ナビゲーション */
+    nav {
+      background-color: #302f28;
+      text-align: center;
+      padding: 14px;
+    }
+
+    nav a {
+      color: #eee8db;
+      text-decoration: none;
+      margin: 0 25px;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+
+    nav a:hover {
+      color: #caa96a;
+    }
+
+    /* 共通 */
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 90px 30px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title .small {
+      display: block;
+      color: #8a7658;
+      font-size: 13px;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: normal;
+      letter-spacing: 5px;
+    }
+
+    /* お店について */
+    .about {
+      display: flex;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .about-image {
+      flex: 1;
+    }
+
+    .about-image img {
+      width: 100%;
+      display: block;
+      filter: sepia(15%);
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text h3 {
+      font-size: 24px;
+      font-weight: normal;
+      color: #4b5744;
+      margin-top: 0;
+    }
+
+    /* メニュー */
+    #menu {
+      background-color: #ebe4d7;
+      max-width: none;
+      padding-left: calc((100% - 1000px) / 2 + 30px);
+      padding-right: calc((100% - 1000px) / 2 + 30px);
+    }
+
+    .menu-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .menu-item {
+      background-color: #f8f5ed;
+      padding: 22px;
+      border: 1px solid #d6ccba;
+      box-shadow: 0 5px 15px rgba(60, 50, 35, 0.08);
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 20px;
+
+      /* 陶器のお皿っぽく見えるように */
+      border-radius: 48% 48% 45% 45%;
+    }
+
+    .menu-item h3 {
+      margin: 0;
+      color: #4b5744;
+      font-size: 21px;
+      font-weight: normal;
+    }
+
+    .menu-description {
+      font-size: 14px;
+      color: #756e62;
+      margin: 8px 0;
+    }
+
+    .price {
+      color: #7b6043;
+      font-size: 18px;
+      text-align: right;
+    }
+
+    /* こだわり */
+    .concept {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .concept p {
+      font-size: 16px;
+    }
+
+    .concept-highlight {
+      color: #4b5744;
+      font-size: 22px;
+      margin-bottom: 25px;
+    }
+
+    /* 店舗情報 */
+    .info {
+      background-color: #302f28;
+      color: #eee8db;
+      max-width: none;
+      text-align: center;
+    }
+
+    .info .section-title h2 {
+      color: #eee8db;
+    }
+
+    .info-table {
+      max-width: 600px;
+      margin: 0 auto;
+      border-top: 1px solid #6d685d;
+    }
+
+    .info-row {
+      display: flex;
+      border-bottom: 1px solid #6d685d;
+      padding: 15px;
+    }
+
+    .info-label {
+      width: 35%;
+      color: #c9b88e;
+    }
+
+    .info-value {
+      width: 65%;
+    }
+
+    /* フッター */
+    footer {
+      background-color: #24241f;
+      color: #aaa69c;
+      text-align: center;
+      padding: 30px;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 700px) {
+
+      header {
+        min-height: 500px;
+      }
+
+      header h1 {
+        font-size: 38px;
+        letter-spacing: 7px;
+      }
+
+      nav a {
+        margin: 0 8px;
+        font-size: 12px;
+      }
+
+      section {
+        padding: 65px 20px;
+      }
+
+      .about {
+        flex-direction: column;
+      }
+
+      .menu-list {
+        grid-template-columns: 1fr;
+      }
+
+      #menu {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .info-row {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-content">
+      <div class="shop-subtitle">KOHYAKU & ICE</div>
+
+      <h1>氷菓 古民家</h1>
+
+      <p>
+        古い家と、季節の果実と、ひとさじの涼。
+      </p>
+    </div>
+  </header>
+
+
+  <!-- ナビゲーション -->
+  <nav>
+    <a href="#about">お店について</a>
+    <a href="#menu">かき氷</a>
+    <a href="#concept">こだわり</a>
+    <a href="#access">店舗情報</a>
+  </nav>
+
+
+  <main>
+
+    <!-- お店について -->
+    <section id="about">
+
+      <div class="section-title">
+        <span class="small">ABOUT US</span>
+        <h2>古民家のかき氷屋</h2>
+      </div>
+
+      <div class="about">
+
+        <div class="about-image">
+          <img
+            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80"
+            alt="古民家風の店内">
+        </div>
+
+        <div class="about-text">
+
+          <h3>
+            静かな時間を<br>
+            かき氷とともに。
+          </h3>
+
+          <p>
+            築70年の古民家を丁寧に改装した、
+            小さなかき氷専門店です。
+          </p>
+
+          <p>
+            古い柱や梁、昔ながらの建具を残した店内で、
+            季節の果物をたっぷり使ったかき氷を
+            一杯ずつ丁寧にお作りしています。
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- メニュー -->
+    <section id="menu">
+
+      <div class="section-title">
+        <span class="small">SEASONAL MENU</span>
+        <h2>季節のかき氷</h2>
+      </div>
+
+
+      <div class="menu-list">
+
+
+        <div class="menu-item">
+
+          <img
+            src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80"
+            alt="苺のかき氷">
+
+          <h3>完熟いちごと練乳</h3>
+
+          <p class="menu-description">
+            甘酸っぱい完熟いちごを贅沢に。
+            自家製いちごソースと練乳を合わせました。
+          </p>
+
+          <div class="price">
+            1,200円
+          </div>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <img
+            src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=900&q=80"
+            alt="桃のかき氷">
+
+          <h3>白桃と桃蜜</h3>
+
+          <p class="menu-description">
+            瑞々しい白桃をたっぷり使用。
+            すっきりとした甘さの桃蜜で仕上げました。
+          </p>
+
+          <div class="price">
+            1,300円
+          </div>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <img
+            src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=900&q=80"
+            alt="マンゴーのかき氷">
+
+          <h3>完熟マンゴーと杏仁</h3>
+
+          <p class="menu-description">
+            とろけるような完熟マンゴーに、
+            まろやかな杏仁ソースを合わせました。
+          </p>
+
+          <div class="price">
+            1,350円
+          </div>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <img
+            src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?auto=format&fit=crop&w=900&q=80"
+            alt="柑橘のかき氷">
+
+          <h3>季節の柑橘と蜂蜜</h3>
+
+          <p class="menu-description">
+            その時期に一番おいしい柑橘を使用。
+            蜂蜜の優しい甘さと合わせました。
+          </p>
+
+          <div class="price">
+            1,150円
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- こだわり -->
+    <section id="concept">
+
+      <div class="section-title">
+        <span class="small">OUR CONCEPT</span>
+        <h2>一杯に、季節を。</h2>
+      </div>
+
+      <div class="concept">
+
+        <p class="concept-highlight">
+          「果物が主役の、静かなかき氷。」
+        </p>
+
+        <p>
+          氷はふんわりと軽く削り、
+          果物はできるだけ旬のものを選んでいます。
+        </p>
+
+        <p>
+          かき氷を盛り付ける器にもこだわり、
+          一点ずつ表情の違う陶器を使用しています。
+        </p>
+
+        <p>
+          古い家具と柔らかな照明に囲まれた店内で、
+          ゆっくりと季節の味をお楽しみください。
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- 店舗情報 -->
+    <section id="access" class="info">
+
+      <div class="section-title">
+        <span class="small">INFORMATION</span>
+        <h2>店舗情報</h2>
+      </div>
+
+
+      <div class="info-table">
+
+        <div class="info-row">
+          <div class="info-label">店名</div>
+          <div class="info-value">氷菓 古民家</div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-label">営業時間</div>
+          <div class="info-value">11:00 ～ 18:00</div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-label">定休日</div>
+          <div class="info-value">水曜日・木曜日</div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-label">住所</div>
+          <div class="info-value">愛知県名古屋市〇〇町1-2-3</div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-label">電話</div>
+          <div class="info-value">052-123-4567</div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    <p>氷菓 古民家</p>
+    <p>© 2026 KOHYAKA KOMINKA</p>
+  </footer>
+
+</body>
+</html>
